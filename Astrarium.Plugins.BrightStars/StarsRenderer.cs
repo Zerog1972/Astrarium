@@ -211,7 +211,8 @@ namespace Astrarium.Plugins.BrightStars
             // Star doesn't have any names
             if (prj.Fov < 2)
             {
-                map.DrawObjectLabel($"HR {s.Number}", font, brush, point, diam);
+                string name = s.Number > 9110 ? s.Names.FirstOrDefault() : $"HR {s.Number}";
+                map.DrawObjectLabel(name, font, brush, point, diam);
             }
         }
 

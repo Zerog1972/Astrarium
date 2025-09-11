@@ -235,13 +235,17 @@ namespace Astrarium.Plugins.BrightStars
         public ICollection<CelestialObject> Search(SkyContext context, string searchString, Func<CelestialObject, bool> filterFunc, int maxCount = 50)
         {
             searchString = regexSpaceRemover.Replace(searchString, " ").Trim();
-            double t = context.Get(YearsSince2000);
-            return Stars.Where(s => s != null &&
-                GetStarNamesForSearch(s)
-                .Any(name => name.StartsWith(searchString, StringComparison.OrdinalIgnoreCase)))
-                .Where(filterFunc)
-                .Take(maxCount)
-                .ToArray();
+
+            var stars = Stars.Where(s => s != null);
+
+            var fullNameMatch =
+                stars.Where(s => GetStarNamesForSearch(s).Any(name => name.Equals(searchString, StringComparison.OrdinalIgnoreCase)));
+
+            var conainsNameMatch =
+                stars.Where(s => GetStarNamesForSearch(s).Any(name => name.StartsWith(searchString, StringComparison.OrdinalIgnoreCase)));
+
+            return fullNameMatch.Concat(conainsNameMatch)
+                .Distinct().Where(filterFunc).Take(maxCount).ToList();
         }
 
         public CelestialObject Search(SkyContext context, string bodyType, string bodyName)
@@ -353,7 +357,7 @@ namespace Astrarium.Plugins.BrightStars
                     names.Add($"{variableName}");
                 }
             }
-            if (s.HDNumber > 0)
+            if (s.HDNumber != null)
             {
                 names.Add($"HD {s.HDNumber}");
                 names.Add($"HD{s.HDNumber}");
@@ -371,9 +375,12 @@ namespace Astrarium.Plugins.BrightStars
                 names.Add($"{s.FK5Number}");
             }
 
-            names.Add($"HR {s.Number}");
-            names.Add($"HR{s.Number}");
-            names.Add($"{s.Number}");
+            if (s.Number <= 9110)
+            {
+                names.Add($"HR {s.Number}");
+                names.Add($"HR{s.Number}");
+                names.Add($"{s.Number}");
+            }
 
             var crossRefNames = GetCrossReferences(s);
             if (crossRefNames != null && crossRefNames.Any())
@@ -425,7 +432,7 @@ namespace Astrarium.Plugins.BrightStars
                     names.Add($"NSV {s.VariableName}");
                 }
             }
-            if (s.HDNumber > 0)
+            if (s.HDNumber != null)
             {
                 names.Add($"HD {s.HDNumber}");
             }
@@ -437,7 +444,11 @@ namespace Astrarium.Plugins.BrightStars
             {
                 names.Add($"FK5 {s.FK5Number}");
             }
-            names.Add($"HR {s.Number}");
+            if (s.Number <= 9110)
+            {
+                names.Add($"HR {s.Number}");
+            }
+
             var crossRefNames = GetCrossReferences(s);
             if (crossRefNames != null && crossRefNames.Any())
             {

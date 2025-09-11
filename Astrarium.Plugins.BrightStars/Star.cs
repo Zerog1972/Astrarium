@@ -93,7 +93,7 @@ namespace Astrarium.Plugins.BrightStars
         /// </summary>
         public string VariableName { get; set; }
 
-        public uint HDNumber { get; set; }
+        public string HDNumber { get; set; }
 
         public uint SAONumber { get; set; }
 
