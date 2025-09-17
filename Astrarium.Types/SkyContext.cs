@@ -156,6 +156,15 @@ namespace Astrarium.Types
         public float DayLightFactor { get; set; }
 
         /// <summary>
+        /// Gets date of the context
+        /// </summary>
+        /// <returns></returns>
+        public Date GetDate()
+        {
+            return new Date(JulianDay, GeoLocation.UtcOffset);
+        }
+
+        /// <summary>
         /// Gets date corresponding to specified Julian Day
         /// </summary>
         /// <param name="jd">Julian Day to convert to the date</param>

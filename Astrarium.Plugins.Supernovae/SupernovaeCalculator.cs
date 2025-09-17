@@ -148,7 +148,7 @@ namespace Astrarium.Plugins.Supernovae
             Supernova s = info.Body;
             SkyContext c = info.Context;
             string constellation = Constellations.FindConstellation(c.Get(Equatorial, s), c.JulianDay);
-            int year = c.GetDate(c.JulianDay).Year;
+            int year = c.GetDate().Year;
             var offset = c.GeoLocation.UtcOffset;
             var jd0 = Date.DeltaT(c.JulianDay) / 86400.0 + Date.JulianDay0(year) - offset / 24;
 
