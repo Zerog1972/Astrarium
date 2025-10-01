@@ -51,13 +51,13 @@ namespace Astrarium.ViewModels
         {
             if (new Date(JulianDayFrom).Year <= 0)
             {
-                ViewManager.ShowMessageBox("$PhenomenaSettingsWindow.WarningTitle", "$PhenomenaSettingsWindow.NoPhenomenaForBCDates", System.Windows.MessageBoxButton.OK);
+                ViewManager.ShowMessageBox("$PhenomenaSettingsWindow.WarningTitle", "$PhenomenaSettingsWindow.NoPhenomenaForBCDates");
                 return;
             }
 
             if (JulianDayFrom > JulianDayTo)
             {
-                ViewManager.ShowMessageBox("$PhenomenaSettingsWindow.WarningTitle", "$PhenomenaSettingsWindow.WarningText", System.Windows.MessageBoxButton.OK);
+                ViewManager.ShowMessageBox("$PhenomenaSettingsWindow.WarningTitle", "$PhenomenaSettingsWindow.WarningText");
                 return;
             }
 

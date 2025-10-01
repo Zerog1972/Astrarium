@@ -47,7 +47,7 @@ namespace Astrarium
             {
                 string message = $"An unhandled exception occurred:\n\n{ea.Exception.Message}\nStack trace:\n\n{ea.Exception.StackTrace}";
                 Log.Fatal(message);
-                ViewManager.ShowMessageBox("Error", message, MessageBoxButton.OK);
+                ViewManager.ShowMessageBox("Error", message);
                 ea.Handled = true;
             };
         }

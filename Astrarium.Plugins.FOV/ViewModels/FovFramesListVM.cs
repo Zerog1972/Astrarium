@@ -62,7 +62,7 @@ namespace Astrarium.Plugins.FOV
         {
             var viewModel = ViewManager.CreateViewModel<FovSettingsVM>();
             viewModel.Frame = frame;
-            if (ViewManager.ShowDialog(viewModel) ?? false)
+            if (ViewManager.ShowDialog(viewModel))
             {
                 frame = viewModel.Frame;
                 int index = fovFrames.FindIndex(f => f.Id == frame.Id);

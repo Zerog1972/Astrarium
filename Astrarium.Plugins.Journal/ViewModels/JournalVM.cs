@@ -502,7 +502,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
             model.Date = session.Begin.Date;
             model.Begin = session.Begin.TimeOfDay;
             model.End = session.End.TimeOfDay;
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 double jd = new Date(model.Date.Year, model.Date.Month, model.Date.Day + model.Begin.TotalDays, sky.Context.GeoLocation.UtcOffset).ToJulianEphemerisDay();
                 var targetDetails = CreateTargetDetails(jd, model.CelestialBody);
@@ -521,7 +521,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
             model.End = observation.End.TimeOfDay;
             model.CelestialBody = await dbManager.GetTarget(observation.TargetId);
             
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {                
                 await dbManager.EditObservation(observation, model.CelestialBody, model.Date.Date + model.Begin, model.Date.Date + model.End);
                 LoadJournalItemDetails();
@@ -668,7 +668,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<OpticsVM>();
             model.Optics = await dbManager.GetOptics(id);
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 UnsubscribeFromChanges(SelectedTreeViewItem);
                 Optics = await dbManager.GetOptics();
@@ -681,7 +681,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<OpticsVM>();
             model.Optics = new Optics() { Id = Guid.NewGuid().ToString(), Type = "Telescope" };
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 Optics = await dbManager.GetOptics();
                 (SelectedTreeViewItem as Observation).TelescopeId = model.Optics.Id;
@@ -704,7 +704,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<EyepieceVM>();
             model.Eyepiece = await dbManager.GetEyepiece(id);
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 UnsubscribeFromChanges(SelectedTreeViewItem);
                 Eyepieces = await dbManager.GetEyepieces();
@@ -717,7 +717,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<EyepieceVM>();
             model.Eyepiece = new Eyepiece() { Id = Guid.NewGuid().ToString() };
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 Eyepieces = await dbManager.GetEyepieces();
                 (SelectedTreeViewItem as Observation).EyepieceId = model.Eyepiece.Id;
@@ -740,7 +740,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<LensVM>();
             model.Lens = await dbManager.GetLens(id);
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 UnsubscribeFromChanges(SelectedTreeViewItem);
                 Lenses = await dbManager.GetLenses();
@@ -753,7 +753,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<LensVM>();
             model.Lens = new Lens() { Id = Guid.NewGuid().ToString() };
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 Lenses = await dbManager.GetLenses();
                 (SelectedTreeViewItem as Observation).LensId = model.Lens.Id;
@@ -776,7 +776,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<FilterVM>();
             model.Filter = await dbManager.GetFilter(id);
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 UnsubscribeFromChanges(SelectedTreeViewItem);
                 Filters = await dbManager.GetFilters();
@@ -789,7 +789,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<FilterVM>();
             model.Filter = new Filter() { Id = Guid.NewGuid().ToString() };
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 Filters = await dbManager.GetFilters();
                 (SelectedTreeViewItem as Observation).FilterId = model.Filter.Id;
@@ -812,7 +812,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<CameraVM>();
             model.Camera = await dbManager.GetCamera(id);
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 UnsubscribeFromChanges(SelectedTreeViewItem);
                 Cameras = await dbManager.GetCameras();
@@ -824,7 +824,7 @@ namespace Astrarium.Plugins.Journal.ViewModels
         {
             var model = ViewManager.CreateViewModel<CameraVM>();
             model.Camera = new Camera() { Id = Guid.NewGuid().ToString() };
-            if (ViewManager.ShowDialog(model) ?? false)
+            if (ViewManager.ShowDialog(model))
             {
                 Cameras = await dbManager.GetCameras();
                 (SelectedTreeViewItem as Observation).CameraId = model.Camera.Id;
@@ -917,7 +917,8 @@ namespace Astrarium.Plugins.Journal.ViewModels
 
             if (body == null && (details.RA == null || details.Dec == null))
             {
-                ViewManager.ShowMessageBox("$Error", "Unable to resolve the observation target.", MessageBoxButton.OK);
+                // TODO: localization
+                ViewManager.ShowMessageBox("$Error", "Unable to resolve the observation target.");
                 return;
             }
 
@@ -959,7 +960,8 @@ namespace Astrarium.Plugins.Journal.ViewModels
                 }
                 else
                 {
-                    ViewManager.ShowMessageBox("$Error", "Unable to resolve the observation target.", MessageBoxButton.OK);
+                    // TODO: localization
+                    ViewManager.ShowMessageBox("$Error", "Unable to resolve the observation target.");
                 }
             }
         }

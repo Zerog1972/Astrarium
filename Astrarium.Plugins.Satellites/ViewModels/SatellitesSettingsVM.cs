@@ -76,7 +76,7 @@ namespace Astrarium.Plugins.Satellites.ViewModels
         {
             var vm = ViewManager.CreateViewModel<EditTleSourceVM>();
             vm.SetTleSource(Sources, tleSource);
-            if (ViewManager.ShowDialog(vm) == true)
+            if (ViewManager.ShowDialog(vm))
             {
                 int index = Sources.IndexOf(tleSource);
                 if (index >= 0)

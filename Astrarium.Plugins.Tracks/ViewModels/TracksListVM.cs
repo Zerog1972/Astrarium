@@ -124,7 +124,7 @@ namespace Astrarium.Plugins.Tracks.ViewModels
             vm.UtcOffset = sky.Context.GeoLocation.UtcOffset;
             vm.TrackColor = t.Color;
 
-            if (ViewManager.ShowDialog(vm) ?? false)
+            if (ViewManager.ShowDialog(vm))
             {
                 sky.Calculate();
                 LoadList();

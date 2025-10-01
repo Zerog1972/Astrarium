@@ -71,7 +71,7 @@ namespace Astrarium.Plugins.Horizon.ViewModels
                 vm.AzimuthShift = (decimal)landscape.AzimuthShift;
                 vm.Description = landscape.Description;
 
-                if (ViewManager.ShowDialog(vm) == true)
+                if (ViewManager.ShowDialog(vm))
                 {
                     landscape.Title = NullIfEmpty(vm.Title);
                     landscape.AzimuthShift = (double)vm.AzimuthShift;

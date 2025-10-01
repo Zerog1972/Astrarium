@@ -45,12 +45,12 @@ namespace Astrarium
             Show<TViewModel>(viewModel: null, isDialog: false, flags: flags);
         }
 
-        public bool? ShowDialog<TViewModel>() where TViewModel : ViewModelBase
+        public bool ShowDialog<TViewModel>() where TViewModel : ViewModelBase
         {
             return Show<TViewModel>(viewModel: null, isDialog: true, flags: ViewFlags.None);
         }
 
-        private bool? Show<TViewModel>(TViewModel viewModel, bool isDialog, ViewFlags flags) where TViewModel : ViewModelBase
+        private bool Show<TViewModel>(TViewModel viewModel, bool isDialog, ViewFlags flags) where TViewModel : ViewModelBase
         {
             // Resolve view by model type
 
@@ -86,7 +86,8 @@ namespace Astrarium
                     {
                         SystemCommands.RestoreWindow(window);
                     }
-                    return null;
+
+                    return true;
                 }
             }
 
@@ -150,7 +151,7 @@ namespace Astrarium
                 {
                     try
                     {
-                        return window.ShowDialog();
+                        return window.ShowDialog() ?? false;
                     }
                     finally
                     {
@@ -161,12 +162,12 @@ namespace Astrarium
                 {
                     Log.Action(window.GetType().FullName, JsonConvert.SerializeObject(viewModel.Payload));
                     window.Show();
-                    return null;
+                    return true;
                 }
             }
             else
             {
-                return null;
+                return false;
             }
         }
 
@@ -250,7 +251,7 @@ namespace Astrarium
             Show(viewModel: viewModel, isDialog: false, flags: flags);
         }
 
-        public bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : ViewModelBase
+        public bool ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : ViewModelBase
         {
             return Show(viewModel: viewModel, isDialog: true, flags: ViewFlags.None);
         }
@@ -379,7 +380,7 @@ namespace Astrarium
             }
             else
             {
-                return (ShowDialog(vm) ?? false) ? (double?)vm.JulianDay : null;
+                return ShowDialog(vm) ? (double?)vm.JulianDay : null;
             }
         }
 
@@ -393,7 +394,7 @@ namespace Astrarium
             }
             else
             {
-                return (ShowDialog(vm) ?? false) ? (double?)vm.ViewAngle : null;
+                return ShowDialog(vm) ? (double?)vm.ViewAngle : null;
             }
         }
 
@@ -402,7 +403,7 @@ namespace Astrarium
             var vm = CreateViewModel<ColorPickerVM>();
             vm.SelectedColor = color;
             vm.Title = caption;
-            return (ShowDialog(vm) ?? false) ? (Color?)vm.SelectedColor : null;
+            return ShowDialog(vm) ? (Color?)vm.SelectedColor : null;
         }
 
         public CelestialObject ShowSearchDialog(Func<CelestialObject, bool> filter = null)
@@ -413,7 +414,7 @@ namespace Astrarium
                 vm.Filter = filter;
             }
 
-            return (ShowDialog(vm) ?? false) ? vm.SelectedItem.Body : null;
+            return ShowDialog(vm) ? vm.SelectedItem.Body : null;
         }
 
         public CrdsGeographical ShowLocationDialog(CrdsGeographical location)
@@ -432,7 +433,7 @@ namespace Astrarium
         {
             var vm = CreateViewModel<TimeSpanVM>();
             vm.TimeSpan = timeSpan;
-            return (ShowDialog(vm) ?? false) ? (TimeSpan?)vm.TimeSpan : null;
+            return ShowDialog(vm) ? (TimeSpan?)vm.TimeSpan : null;
         }
 
         public void ShowPopupMessage(string message)

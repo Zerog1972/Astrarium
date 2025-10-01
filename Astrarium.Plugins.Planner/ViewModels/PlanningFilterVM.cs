@@ -295,7 +295,7 @@ namespace Astrarium.Plugins.Planner.ViewModels
         {
             if (new Date(JulianDay).Year <= 0)
             {
-                ViewManager.ShowMessageBox("$Warning", "$Planner.PlanningFilter.IncorrectDate", System.Windows.MessageBoxButton.OK);
+                ViewManager.ShowMessageBox("$Warning", "$Planner.PlanningFilter.IncorrectDate");
                 return;
             }
 

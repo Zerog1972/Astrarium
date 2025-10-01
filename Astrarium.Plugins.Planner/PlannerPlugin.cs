@@ -94,7 +94,7 @@ namespace Astrarium.Plugins.Planner
                     planFilterVM.Title = Text.Get("Planner.PlanningFilter.Import.Title");
             }
 
-            if (ViewManager.ShowDialog(planFilterVM) ?? false)
+            if (ViewManager.ShowDialog(planFilterVM))
             {
                 var planListVM = ViewManager.CreateViewModel<PlanningListVM>();
                 ViewManager.ShowWindow(planListVM);
@@ -181,7 +181,7 @@ namespace Astrarium.Plugins.Planner
                 planFilterVM.Nodes.First().IsChecked = true;
             }
 
-            if (ViewManager.ShowDialog(planFilterVM) ?? false)
+            if (ViewManager.ShowDialog(planFilterVM))
             {
                 settings.SetAndSave("PlannerDefaultSettings", planFilterVM.Filter);
             }

@@ -236,4 +236,6 @@ namespace Astrarium
         /// </summary>
         public string OpenGLVersion { get; private set; }
     }
+
+
 }

@@ -59,7 +59,7 @@ namespace Astrarium.Plugins.FOV
                 {
                     vm.Telescope.CopyFrom(Telescope);
                 }
-                if (ViewManager.ShowDialog(vm) ?? false)
+                if (ViewManager.ShowDialog(vm))
                 {
                     if (isNew)
                     {
@@ -82,7 +82,7 @@ namespace Astrarium.Plugins.FOV
                 {
                     vm.Eyepiece.CopyFrom(Eyepiece);
                 }
-                if (ViewManager.ShowDialog(vm) ?? false)
+                if (ViewManager.ShowDialog(vm))
                 {
                     if (isNew)
                     {
@@ -105,7 +105,7 @@ namespace Astrarium.Plugins.FOV
                 {
                     vm.Camera.CopyFrom(Camera);
                 }
-                if (ViewManager.ShowDialog(vm) ?? false)
+                if (ViewManager.ShowDialog(vm))
                 {
                     if (isNew)
                     {
@@ -128,7 +128,7 @@ namespace Astrarium.Plugins.FOV
                 {
                     vm.Binocular.CopyFrom(Binocular);
                 }
-                if (ViewManager.ShowDialog(vm) ?? false)
+                if (ViewManager.ShowDialog(vm))
                 {
                     if (isNew)
                     {

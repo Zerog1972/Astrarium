@@ -786,7 +786,7 @@ namespace Astrarium.ViewModels
             es.SelectedBody = map.SelectedObject;
             es.JulianDayFrom = sky.Context.JulianDay;
             es.JulianDayTo = sky.Context.JulianDay + 30;
-            if (ViewManager.ShowDialog(es) ?? false)
+            if (ViewManager.ShowDialog(es))
             {
                 var tokenSource = new CancellationTokenSource();
                 var progress = new Progress<double>();
@@ -817,7 +817,7 @@ namespace Astrarium.ViewModels
         {
             var ps = ViewManager.CreateViewModel<PhenomenaSettingsVM>();
 
-            if (ViewManager.ShowDialog(ps) ?? false)
+            if (ViewManager.ShowDialog(ps))
             {
                 var tokenSource = new CancellationTokenSource();
                 ViewManager.ShowProgress("$CalculatePhenomena.WaitTitle", "$CalculatePhenomena.WaitText", tokenSource);
@@ -1066,7 +1066,7 @@ namespace Astrarium.ViewModels
                         }
                     }
 
-                    if (ViewManager.ShowDialog(vm) ?? false)
+                    if (ViewManager.ShowDialog(vm))
                     {
                         sky.SetDate(vm.JulianDay);
                         map.GoToObject(body, TimeSpan.Zero, 0);

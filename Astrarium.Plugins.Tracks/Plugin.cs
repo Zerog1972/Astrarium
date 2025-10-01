@@ -53,7 +53,7 @@ namespace Astrarium.Plugins.Tracks
             vm.JulianDayTo = sky.Context.JulianDay + 30;
             vm.UtcOffset = sky.Context.GeoLocation.UtcOffset;
 
-            if (ViewManager.ShowDialog(vm) ?? false)
+            if (ViewManager.ShowDialog(vm))
             {
                 sky.Calculate();
             }
@@ -64,7 +64,7 @@ namespace Astrarium.Plugins.Tracks
             if (IsTracksListEnabled)
             {
                 var vm = ViewManager.CreateViewModel<TracksListVM>();
-                if (ViewManager.ShowDialog(vm) ?? false)
+                if (ViewManager.ShowDialog(vm))
                 {
                     sky.Calculate();
                 }

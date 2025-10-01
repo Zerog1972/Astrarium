@@ -309,7 +309,7 @@ namespace Astrarium.Plugins.Planner.ViewModels
         {
             var vm = ViewManager.CreateViewModel<SmartFilterVM>();
             vm.FilterString = FilterString;
-            if (ViewManager.ShowDialog(vm) == true)
+            if (ViewManager.ShowDialog(vm))
             {
                 FilterString = vm.FilterString;
             }
@@ -384,7 +384,7 @@ namespace Astrarium.Plugins.Planner.ViewModels
             vm.Title = Text.Get("Planner.PlanningFilter.AddingObjects.Title");
             vm.Filter = filter;
             vm.IsDateTimeControlsVisible = false;
-            if (ViewManager.ShowDialog(vm) ?? false)
+            if (ViewManager.ShowDialog(vm))
             {
                 DoCreatePlan(vm.Filter);
                 IsSaved = false;

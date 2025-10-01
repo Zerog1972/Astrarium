@@ -46,7 +46,7 @@ namespace Astrarium.Types
             viewManager.ShowWindow<TViewModel>(flags);
         }
 
-        public static bool? ShowDialog<TViewModel>() where TViewModel : ViewModelBase
+        public static bool ShowDialog<TViewModel>() where TViewModel : ViewModelBase
         {
             return viewManager.ShowDialog<TViewModel>();
         }
@@ -56,19 +56,14 @@ namespace Astrarium.Types
             viewManager.ShowWindow(viewModel, flags);
         }
 
-        public static bool? ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : ViewModelBase
+        public static bool ShowDialog<TViewModel>(TViewModel viewModel) where TViewModel : ViewModelBase
         {
             return viewManager.ShowDialog(viewModel);
         }
 
-        public static MessageBoxResult ShowMessageBox(string caption, string text, MessageBoxButton buttons)
+        public static MessageBoxResult ShowMessageBox(string caption, string text, MessageBoxButton buttons = MessageBoxButton.OK)
         {
             return viewManager.ShowMessageBox(caption, text, buttons);
-        }
-
-        public static MessageBoxResult ShowMessageBox(string caption, string text)
-        {
-            return viewManager.ShowMessageBox(caption, text, MessageBoxButton.OK);
         }
 
         /// <summary>
