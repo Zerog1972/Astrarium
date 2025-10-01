@@ -96,7 +96,9 @@ namespace Astrarium.Plugins.Tycho2
 
                     if (prj.IsInsideScreen(p))
                     {
-                        GL.PointSize(size * starsScalingFactor);
+                        float sz = size * starsScalingFactor;
+
+                        GL.PointSize(sz);
                         GL.Color3(GetColor(star.SpectralClass).Tint(nightMode));
 
                         GL.Begin(GL.POINTS);
@@ -107,7 +109,7 @@ namespace Astrarium.Plugins.Tycho2
 
                         if (isLabels && prj.Fov < 1 && size > 3)
                         {
-                            map.DrawObjectLabel(star.Names.First(), fontNames, brushNames, p, size);
+                            map.DrawObjectLabel(star.Names.First(), fontNames, brushNames, p, sz);
                         }
                     }
                 }

@@ -94,7 +94,7 @@ namespace Astrarium.Plugins.BrightStars
                 var brushStarNames = new SolidBrush(color);
                 bool starsLabels = settings.Get("StarsLabels");
                 bool properNames = settings.Get("StarsProperNames");
-                float starsScalingFactor = (float)settings.Get<decimal>("StarsScalingFactor", 1);
+                float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
 
                 float magLimit = prj.MagLimit;
                 var stars = starsCalc.GetStars(eqCenter, fov, m => m <= magLimit);
@@ -109,7 +109,9 @@ namespace Astrarium.Plugins.BrightStars
 
                         if (prj.IsInsideScreen(p))
                         {
-                            GL.PointSize(size * starsScalingFactor);
+                            float sz = size * starsScalingFactor;
+
+                            GL.PointSize(sz);
                             GL.Color3(GetColor(star.Color).Tint(nightMode));
 
                             GL.Begin(GL.POINTS);
@@ -120,7 +122,7 @@ namespace Astrarium.Plugins.BrightStars
 
                             if (starsLabels)
                             {
-                                DrawStarName(prj, fontStarNames, brushStarNames, properNames, p, star, size);
+                                DrawStarName(prj, fontStarNames, brushStarNames, properNames, p, star, sz);
                             }
                         }
                     }

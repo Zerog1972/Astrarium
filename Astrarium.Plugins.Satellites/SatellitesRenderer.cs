@@ -39,6 +39,7 @@ namespace Astrarium.Plugins.Satellites
             Brush brushLabel = new SolidBrush(labelColor);
             Brush brushEclipsedLabel = new SolidBrush(eclipsedLabelColor);
             var fontNames = settings.Get<Font>("SatellitesLabelsFont");
+            float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
             double fov = prj.RealFov;
 
             // filter satellites
@@ -104,7 +105,9 @@ namespace Astrarium.Plugins.Satellites
 
                     if (prj.IsInsideScreen(p))
                     {
-                        GL.PointSize(size);
+                        float sz = size * starsScalingFactor;
+
+                        GL.PointSize(sz);
                         GL.Begin(GL.POINTS);
                         GL.Color3(satelliteColor);
                         GL.Vertex2(p.X, p.Y);
@@ -113,7 +116,7 @@ namespace Astrarium.Plugins.Satellites
                         if (drawLabels)
                         {
                             var brush = isEclipsed ? brushEclipsedLabel : brushLabel;
-                            map.DrawObjectLabel(s.Name, fontNames, brush, p, size);
+                            map.DrawObjectLabel(s.Name, fontNames, brush, p, sz);
                         }
 
                         map.AddDrawnObject(p, s);

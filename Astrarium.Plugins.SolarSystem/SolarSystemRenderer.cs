@@ -441,7 +441,7 @@ namespace Astrarium.Plugins.SolarSystem
         {
             var prj = map.Projection;
             var nightMode = settings.Get("NightMode");
-            float starsScalingFactor = (float)settings.Get<decimal>("StarsScalingFactor", 1);
+            float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
             double alt = prj.ToHorizontal(data.Equatorial).Altitude;
 
             // size of object when it's drawn as point (in pixels)
@@ -746,7 +746,7 @@ namespace Astrarium.Plugins.SolarSystem
             {
                 string label = data.Label ?? body.Names.First();
                 var fontLabel = settings.Get<Font>("SolarSystemLabelsFont");
-                map.DrawObjectLabel(label, fontLabel, brushLabel, p, Math.Max(size, diam));
+                map.DrawObjectLabel(label, fontLabel, brushLabel, p, Math.Max(size * starsScalingFactor, diam));
             }
 
             return renderResult;

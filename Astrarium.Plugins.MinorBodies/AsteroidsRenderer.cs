@@ -36,6 +36,7 @@ namespace Astrarium.Plugins.MinorBodies
             decimal drawAllMagLimit = settings.Get<decimal>("AsteroidsDrawAllMagLimit");
             bool drawLabelMag = settings.Get<bool>("AsteroidsLabelsMag");
             var font = settings.Get<Font>("AsteroidsLabelsFont");
+            float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
             var eqCenter = prj.WithoutRefraction(prj.CenterEquatorial);
             var asteroids = asteroidsCalc.Asteroids;
             double fov = prj.RealFov;
@@ -98,12 +99,14 @@ namespace Astrarium.Plugins.MinorBodies
 
                         if (prj.IsInsideScreen(p))
                         {
+                            float sz = size * starsScalingFactor;
+
                             GL.Enable(GL.POINT_SMOOTH);
                             GL.Enable(GL.BLEND);
                             GL.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
                             GL.Hint(GL.POINT_SMOOTH_HINT, GL.NICEST);
 
-                            GL.PointSize(size);
+                            GL.PointSize(sz);
                             GL.Begin(GL.POINTS);
                             GL.Color3(clrPoint);
                             GL.Vertex2(p.X, p.Y);
@@ -111,7 +114,7 @@ namespace Astrarium.Plugins.MinorBodies
 
                             if (drawLabels)
                             {
-                                DrawLabel(a, font, brushNames, p, size, drawLabelMag);
+                                DrawLabel(a, font, brushNames, p, sz, drawLabelMag);
                             }
 
                             map.AddDrawnObject(p, a);

@@ -34,6 +34,7 @@ namespace Astrarium.Plugins.Supernovae
             Color labelColor = settings.Get<Color>("ColorStarsLabels").Tint(nightMode);
             Brush brushLabel = new SolidBrush(labelColor);
             var fontStarNames = settings.Get<Font>("StarsLabelsFont");
+            float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
             double fov = prj.RealFov;
 
             // filter novae by magnitude and FOV
@@ -57,7 +58,8 @@ namespace Astrarium.Plugins.Supernovae
 
                     if (prj.IsInsideScreen(p))
                     {
-                        GL.PointSize(size);
+                        float sz = size * starsScalingFactor;
+                        GL.PointSize(sz);
                         GL.Begin(GL.POINTS);
                         GL.Color3(Color.White.Tint(nightMode));
                         GL.Vertex2(p.X, p.Y);
@@ -65,7 +67,7 @@ namespace Astrarium.Plugins.Supernovae
 
                         if (drawLabels)
                         {
-                            map.DrawObjectLabel(star.Name, fontStarNames, brushLabel, p, size);
+                            map.DrawObjectLabel(star.Name, fontStarNames, brushLabel, p, sz);
                         }
 
                         map.AddDrawnObject(p, star);

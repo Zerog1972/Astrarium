@@ -80,7 +80,8 @@ namespace Astrarium.Plugins.UCAC4
 
                     if (prj.IsInsideScreen(p))
                     {
-                        GL.PointSize(size * starsScalingFactor);
+                        float sz = size * starsScalingFactor;
+                        GL.PointSize(sz);
                         GL.Color3(GetColor(star.SpectralClass).Tint(nightMode));
 
                         GL.Begin(GL.POINTS);
@@ -91,7 +92,7 @@ namespace Astrarium.Plugins.UCAC4
 
                         if (isLabels && size > 2)
                         {
-                            map.DrawObjectLabel(star.Names.First(), fontNames, brushNames, p, size);
+                            map.DrawObjectLabel(star.Names.First(), fontNames, brushNames, p, sz);
                         }
                     }
                 }

@@ -36,6 +36,7 @@ namespace Astrarium.Plugins.MinorBodies
             decimal drawAllMagLimit = settings.Get<decimal>("CometsDrawAllMagLimit");
             bool drawLabelMag = settings.Get<bool>("CometsLabelsMag");
             var font = settings.Get<Font>("CometsLabelsFont");
+            float starsScalingFactor = (float)settings.Get("StarsScalingFactor", 1m);
             var eqCenter = prj.WithoutRefraction(prj.CenterEquatorial);
             double fov = prj.RealFov;
             var comets = cometsCalc.Comets.Where(a => Angle.Separation(eqCenter, a.Equatorial) < fov + Angle.Separation(a.Equatorial, a.TailEquatorial) + a.Semidiameter / 3600);
@@ -115,12 +116,14 @@ namespace Astrarium.Plugins.MinorBodies
                 }
                 else if ((int)size > 0 && prj.IsInsideScreen(p))
                 {
+                    float sz = size * starsScalingFactor;
+
                     GL.Enable(GL.POINT_SMOOTH);
                     GL.Enable(GL.BLEND);
                     GL.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
                     GL.Hint(GL.POINT_SMOOTH_HINT, GL.NICEST);
 
-                    GL.PointSize(size);
+                    GL.PointSize(sz);
                     GL.Begin(GL.POINTS);
                     GL.Color3(colorComet.Tint(nightMode));
                     GL.Vertex2(p.X, p.Y);
@@ -128,7 +131,7 @@ namespace Astrarium.Plugins.MinorBodies
 
                     if (drawLabels)
                     {
-                        DrawLabel(c, font, brushNames, p, size, drawLabelMag);
+                        DrawLabel(c, font, brushNames, p, sz, drawLabelMag);
                     }
 
                     map.AddDrawnObject(p, c);
