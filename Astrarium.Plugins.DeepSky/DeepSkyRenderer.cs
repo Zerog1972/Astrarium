@@ -78,16 +78,33 @@ namespace Astrarium.Plugins.DeepSky
             double fov = prj.RealFov;
             var eqCenter = prj.WithoutRefraction(prj.CenterEquatorial);
 
-            // filter deep skies by:
-            var deepSkies =
-                // take existing objects only (obviously, do not draw objects that are catalog errors)
-                deepSkyCalc.deepSkies.Where(ds => /*!ds.Status.IsEmpty() && */
-                // do not draw small objects for current FOV
-                (ds.Semidiameter == 0 || prj.GetDiskSize(ds.Semidiameter) > 20) &&
-                // do not draw dim objects (exceeding mag limit for current FOV)
-                ((float.IsNaN(ds.Magnitude) ? 10 : ds.Magnitude) <= prj.MagLimit) &&
-                // do not draw object outside current FOV
-                Angle.Separation(eqCenter, ds.Equatorial) < fov + ds.Semidiameter / 3600 * 2).ToList();
+
+            var deepSkies = deepSkyCalc.deepSkies.AsEnumerable();
+
+            // FILTER DSO:
+
+            if (settings.Get("DeepSkyHideUnknown"))
+            {
+                // take existing objects only (do not draw objects that are catalog errors)
+                deepSkies = deepSkies.Where(ds => 
+                    !ds.Status.IsEmpty() && ds.Semidiameter != 0);
+            }
+            
+            // do not draw small objects for current FOV
+            deepSkies = deepSkies.Where(ds =>
+                (ds.Semidiameter == 0 || prj.GetDiskSize(ds.Semidiameter) > 5));
+
+            
+            if (!settings.Get("DeepSkyDisplayRegardlessMag"))
+            {
+                // do not draw dim objects (take mag limit for current FOV)
+                deepSkies = deepSkies.Where(ds =>
+                    ((float.IsNaN(ds.Magnitude) ? 10 : ds.Magnitude) <= prj.MagLimit));
+            }
+
+            // do not draw object outside current FOV
+            deepSkies = deepSkies.Where(ds =>                
+                Angle.Separation(eqCenter, ds.Equatorial) < fov + ds.Semidiameter / 3600 * 2);
 
             foreach (var ds in deepSkies)
             {

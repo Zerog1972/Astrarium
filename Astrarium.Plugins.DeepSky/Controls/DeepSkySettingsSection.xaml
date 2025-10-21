@@ -24,6 +24,8 @@
 
         <CheckBox Content="{t:Text Settings.DeepSky}" IsChecked="{Binding Settings.DeepSky}" Margin="2" />
         <StackPanel Orientation="Vertical" IsEnabled="{Binding Settings.DeepSky}">
+            <CheckBox Content="{t:Text Settings.DeepSkyDisplayRegardlessMag}" IsChecked="{Binding Settings.DeepSkyDisplayRegardlessMag}" Margin="2" />
+            <CheckBox Content="{t:Text Settings.DeepSkyHideUnknown}" IsChecked="{Binding Settings.DeepSkyHideUnknown}" Margin="2" />
             <CheckBox Content="{t:Text Settings.DeepSkyLabels}" IsChecked="{Binding Settings.DeepSkyLabels}" Margin="2" />
             <CheckBox Content="{t:Text Settings.DeepSkyImages}" IsChecked="{Binding Settings.DeepSkyImages}" Margin="2" />
             <CheckBox Content="{t:Text Settings.DeepSkyHideOutline}" IsChecked="{Binding Settings.DeepSkyHideOutline}" Margin="2" />
