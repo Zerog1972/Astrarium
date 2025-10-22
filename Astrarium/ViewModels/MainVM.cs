@@ -1093,5 +1093,7 @@ namespace Astrarium.ViewModels
                 SetLocation(location);
             }
         }
+
+        public override object Payload => new { OS = Environment.OSVersion };
     }
 }
