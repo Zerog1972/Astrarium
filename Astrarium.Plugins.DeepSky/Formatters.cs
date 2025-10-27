@@ -14,12 +14,12 @@ namespace Astrarium.Plugins.DeepSky
         }
     }
 
-    internal class DeepSkySurfaceBrightnessFormatter : Formatters.SignedDoubleFormatter
+    internal class DeepSkySurfaceBrightnessFormatter : SignedDoubleFormatter
     {
         internal DeepSkySurfaceBrightnessFormatter() : base(2, " mag/sq.arcsec") { }
     }
 
-    internal class DeepSkyPositionAngleFormatter : Formatters.UnsignedDoubleFormatter
+    internal class DeepSkyPositionAngleFormatter : UnsignedDoubleFormatter
     {
         internal DeepSkyPositionAngleFormatter() : base(0, "\u00B0") { }
     }

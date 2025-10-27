@@ -35,8 +35,8 @@ namespace Astrarium.Plugins.JupiterMoons
         private readonly IEphemFormatter MonthYearFormatter = Formatters.MonthYear;
         private readonly IEphemFormatter DateFormatter = Formatters.Date;
         private readonly IEphemFormatter TimeFormatter = Formatters.Time;
-        private readonly IEphemFormatter DurationFormatter = new Formatters.TimeFormatter(withSeconds: true);
-        private readonly IEphemFormatter AltitudeFormatter = new Formatters.SignedDoubleFormatter(1, "\u00B0");
+        private readonly IEphemFormatter DurationFormatter = new TimeFormatter(withSeconds: true);
+        private readonly IEphemFormatter AltitudeFormatter = new SignedDoubleFormatter(1, "\u00B0");
 
         #endregion Formatters
 

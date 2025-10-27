@@ -3,12 +3,7 @@ using Astrarium.Plugins.SolarSystem.Objects;
 using Astrarium.Types;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Astrarium.Plugins.SolarSystem
 {
@@ -135,7 +130,7 @@ namespace Astrarium.Plugins.SolarSystem
         /// <summary>
         /// Gets geocentric elongation angle of the Moon
         /// </summary>
-        private double Elongation(SkyContext c)
+        public double Elongation(SkyContext c)
         {
             return BasicEphem.Elongation(c.Get(SunEcliptical), c.Get(Ecliptical0));
         }
@@ -159,7 +154,7 @@ namespace Astrarium.Plugins.SolarSystem
         /// <summary>
         /// Get position angle of axis for the Moon
         /// </summary>
-        private double PAaxis(SkyContext c)
+        public double PAaxis(SkyContext c)
         {
             return LunarEphem.PositionAngleOfAxis(c.JulianDay, c.Get(Ecliptical), c.Epsilon, c.NutationElements.deltaPsi);
         }
@@ -183,7 +178,7 @@ namespace Astrarium.Plugins.SolarSystem
         /// <summary>
         /// Gets nearest phase date
         /// </summary>
-        private Date NearestPhase(SkyContext c, MoonPhase p)
+        public Date NearestPhase(SkyContext c, MoonPhase p)
         {
             return c.GetDate(LunarEphem.NearestPhase(c.JulianDay, p));
         }
@@ -314,7 +309,7 @@ namespace Astrarium.Plugins.SolarSystem
             e["Ecliptical.Beta"] = (c, m) => c.Get(Ecliptical0).Beta;
             e["Phase"] = (c, m) => c.Get(Phase);
             e["PhaseAngle"] = (c, m) => c.Get(PhaseAngle);
-            e["Age", new Formatters.UnsignedDoubleFormatter(2, " d")] = (c, m) => c.Get(Age);
+            e["Age", new UnsignedDoubleFormatter(2, " d")] = (c, m) => c.Get(Age);
             e["Lunation"] = (c, m) => c.Get(Lunation);
             e["Magnitude"] = (c, m) => c.Get(Magnitude);
             e["Distance", new LunarDistanceFormatter()] = (c, m) => c.Get(Ecliptical0).Distance;

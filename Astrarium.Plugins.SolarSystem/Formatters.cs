@@ -47,15 +47,15 @@ namespace Astrarium.Plugins.SolarSystem
 
     internal static class OrbitalElementsFormatters
     {
-        public static IEphemFormatter M = new Formatters.UnsignedDoubleFormatter(4, "°");
-        public static IEphemFormatter P = new Formatters.UnsignedDoubleFormatter(4, " d");
-        public static IEphemFormatter n = new Formatters.UnsignedDoubleFormatter(4, " °/d");
-        public static IEphemFormatter e = new Formatters.UnsignedDoubleFormatter(4, "°");
-        public static IEphemFormatter a = new Formatters.UnsignedDoubleFormatter(4, " au");
-        public static IEphemFormatter i = new Formatters.UnsignedDoubleFormatter(4, "°");
-        public static IEphemFormatter w = new Formatters.UnsignedDoubleFormatter(4, "°");
-        public static IEphemFormatter Om = new Formatters.UnsignedDoubleFormatter(4, "°");
-        public static IEphemFormatter Pw = new Formatters.SignedDoubleFormatter(4, " y");
-        public static IEphemFormatter POm = new Formatters.SignedDoubleFormatter(4, " y");
+        public static IEphemFormatter M = new UnsignedDoubleFormatter(4, "°");
+        public static IEphemFormatter P = new UnsignedDoubleFormatter(4, " d");
+        public static IEphemFormatter n = new UnsignedDoubleFormatter(4, " °/d");
+        public static IEphemFormatter e = new UnsignedDoubleFormatter(4, "°");
+        public static IEphemFormatter a = new UnsignedDoubleFormatter(4, " au");
+        public static IEphemFormatter i = new UnsignedDoubleFormatter(4, "°");
+        public static IEphemFormatter w = new UnsignedDoubleFormatter(4, "°");
+        public static IEphemFormatter Om = new UnsignedDoubleFormatter(4, "°");
+        public static IEphemFormatter Pw = new SignedDoubleFormatter(4, " y");
+        public static IEphemFormatter POm = new SignedDoubleFormatter(4, " y");
     }
 }

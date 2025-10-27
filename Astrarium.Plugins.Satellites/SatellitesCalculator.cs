@@ -102,7 +102,7 @@ namespace Astrarium.Plugins.Satellites
             // Satellites do not provide epheremeris
         }
 
-        private class SatelliteMagnitudeFormatter : Formatters.SignedDoubleFormatter
+        private class SatelliteMagnitudeFormatter : SignedDoubleFormatter
         {
             public SatelliteMagnitudeFormatter() : base(1, "ᵐ") { }
             public override string Format(object value)
@@ -114,10 +114,10 @@ namespace Astrarium.Plugins.Satellites
             }
         }
 
-        private IEphemFormatter distanceFormatter = new Formatters.UnsignedDoubleFormatter(0, " km");
+        private IEphemFormatter distanceFormatter = new UnsignedDoubleFormatter(0, " km");
         private IEphemFormatter magnitudeFormatter = new SatelliteMagnitudeFormatter();
-        private IEphemFormatter angle4Formatter = new Formatters.UnsignedDoubleFormatter(4, "\u00B0");
-        private IEphemFormatter angle1Formatter = new Formatters.UnsignedDoubleFormatter(1, "\u00B0");
+        private IEphemFormatter angle4Formatter = new UnsignedDoubleFormatter(4, "\u00B0");
+        private IEphemFormatter angle1Formatter = new UnsignedDoubleFormatter(1, "\u00B0");
 
         private CrdsHorizontal Horizontal(SkyContext c, Satellite s)
         {

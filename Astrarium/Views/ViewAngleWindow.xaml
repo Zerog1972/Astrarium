@@ -47,8 +47,8 @@
 
                 <Slider Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Minimum="{Binding MinFov, Converter={s:LogScaleConverter}}" Maximum="{Binding MaxFov, Converter={s:LogScaleConverter}}" Value="{Binding ViewAngle, Converter={s:LogScaleConverter}}" />
 
-                <TextBlock IsEnabled="False" FontSize="10" Grid.Row="1" Grid.Column="0" Text="{Binding MinFov, Converter={s:FormatterConverter}, ConverterParameter={x:Type t:Formatters+AngleFormatter}, FallbackValue='min'}" HorizontalAlignment="Left" />
-                <TextBlock IsEnabled="False" FontSize="10" Grid.Row="1" Grid.Column="2" Text="{Binding MaxFov, Converter={s:FormatterConverter}, ConverterParameter={x:Type t:Formatters+AngleFormatter}, FallbackValue='max'}" HorizontalAlignment="Right" />
+                <TextBlock IsEnabled="False" FontSize="10" Grid.Row="1" Grid.Column="0" Text="{Binding MinFov, Converter={s:FormatterConverter}, ConverterParameter={x:Type t:AngleFormatter}, FallbackValue='min'}" HorizontalAlignment="Left" />
+                <TextBlock IsEnabled="False" FontSize="10" Grid.Row="1" Grid.Column="2" Text="{Binding MaxFov, Converter={s:FormatterConverter}, ConverterParameter={x:Type t:AngleFormatter}, FallbackValue='max'}" HorizontalAlignment="Right" />
                
             </Grid>
 

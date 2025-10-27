@@ -16,8 +16,8 @@ namespace Astrarium.Plugins.SolarSystem
         
         private readonly IEphemFormatter librationLongitudeFormatter = new LibrationLongitudeFormatter();
         private readonly IEphemFormatter librationLatitudeFormatter = new LibrationLatitudeFormatter();
-        private readonly IEphemFormatter declinationFormatter = new Formatters.SignedDoubleFormatter(3, "\u00B0");
-        private readonly IEphemFormatter conjunctionSeparationFormatter = new Formatters.UnsignedDoubleFormatter(1, "\u00B0");
+        private readonly IEphemFormatter declinationFormatter = new SignedDoubleFormatter(3, "\u00B0");
+        private readonly IEphemFormatter conjunctionSeparationFormatter = new UnsignedDoubleFormatter(1, "\u00B0");
 
         // Bright stars which can be in conjunction with Moon
         private readonly ConjunctedStar[] stars = new ConjunctedStar[]

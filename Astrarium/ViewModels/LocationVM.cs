@@ -45,7 +45,7 @@ namespace Astrarium.ViewModels
         /// <summary>
         /// Formatter used for casting geo coordinates to string
         /// </summary>
-        private readonly IEphemFormatter geoCoordinatesFormatter = new Formatters.GeoCoordinatesFormatter();
+        private readonly IEphemFormatter geoCoordinatesFormatter = new GeoCoordinatesFormatter();
 
         /// <summary>
         /// Creates new instance of the ViewModel

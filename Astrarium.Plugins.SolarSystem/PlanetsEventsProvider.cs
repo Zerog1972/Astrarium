@@ -14,7 +14,7 @@ namespace Astrarium.Plugins.SolarSystem
         private readonly PlanetsCalc planetsCalc;
         private readonly SolarCalc solarCalc;
 
-        private readonly IEphemFormatter conjunctionSeparationFormatter = new Formatters.UnsignedDoubleFormatter(1, "\u00B0");
+        private readonly IEphemFormatter conjunctionSeparationFormatter = new UnsignedDoubleFormatter(1, "\u00B0");
 
         public PlanetsEventsProvider(PlanetsCalc planetsCalc, SolarCalc solarCalc)
         {
